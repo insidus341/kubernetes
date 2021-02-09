@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name: Update APT
+      command: apt-get Update
+
+    - name: Install Python3
+      command: apt-get install python3
+      
