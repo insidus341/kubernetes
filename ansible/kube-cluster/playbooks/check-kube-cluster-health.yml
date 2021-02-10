@@ -9,6 +9,6 @@
     
     - name:
       ansible.builtin.debug:
-        var: node_status
+        var: node_status['stdout_lines']
       
       
