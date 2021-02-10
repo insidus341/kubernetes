@@ -27,6 +27,12 @@
        name: docker-ce
        state: present
        update_cache: true
+   
+   - name: Force Docker to use Systemd
+     commands: 
+     - sed -i '\/ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock/c\ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock --exec-opt native.cgroupdriver=systemd' /usr/lib/systemd/system/docker.service
+     - systemctl daemon-reload
+     - systemctl restart docker
 
    - name: add Kubernetes apt-key
      apt_key:
