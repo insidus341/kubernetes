@@ -34,7 +34,7 @@
    - name: Restart Docker
      shell: |
        systemctl daemon-reload
-       systemctl restart
+       systemctl restart docker
 
    - name: add Kubernetes apt-key
      apt_key:
