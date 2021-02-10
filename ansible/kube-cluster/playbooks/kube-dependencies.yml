@@ -32,7 +32,9 @@
      command: sed -i '\/ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock/c\ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock --exec-opt native.cgroupdriver=systemd' /usr/lib/systemd/system/docker.service
    
    - name: Restart Docker
-     command: systemctl daemon-reload && systemctl restart docker
+     shell: |
+       systemctl daemon-reload
+       systemctl restart
 
    - name: add Kubernetes apt-key
      apt_key:
