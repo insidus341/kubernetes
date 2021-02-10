@@ -26,3 +26,9 @@
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
+
+    - name: Install HAProxy Ingress
+      shell: |
+        helm repo add haproxy-ingress https://haproxy-ingress.github.io/charts
+        helm install haproxy-ingress haproxy-ingress/haproxy-ingress\
+        --create-namespace --namespace ingress-controller\
