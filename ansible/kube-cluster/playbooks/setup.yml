@@ -19,6 +19,9 @@
       with_file:
         - ~/.ssh/id_rsa.pub
 
-    - name: Install Python3
-      command: apt-get install python3
+    - name: install Python3
+      apt:
+        name: python3
+        state: present
+        update_cache: true
       
