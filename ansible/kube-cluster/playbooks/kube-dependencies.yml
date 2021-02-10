@@ -59,7 +59,9 @@
        state: present
 
    - name: Disable system swap
-     command: swapoff -a
+     shell: | 
+       swapoff -a
+       sed -i '/ swap / s/^/#/' /etc/fstab
 
 - hosts: master
   become: yes
