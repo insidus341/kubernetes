@@ -17,7 +17,7 @@
     - name: Setup authorized SSH Key
       authorized_key: user=james key="{{item}}"
       with_file:
-        - ¬/.ssh/id_rsa.pub
+        - ~/.ssh/id_rsa.pub
 
     - name: Install Python3
       command: apt-get install python3
