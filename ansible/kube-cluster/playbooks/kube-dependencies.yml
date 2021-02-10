@@ -77,7 +77,7 @@
      apt_repository:
        repo: deb https://baltocdn.com/helm/stable/debian/ all main
        state: present
-       filename: Helm's
+       filename: helm
 
    - name: add Helm's APT key
      apt_key:
@@ -86,6 +86,6 @@
        
    - name: Install Helm
      apt:
-       name: Helm
+       name: helm
        state: present
        update_cache: true
