@@ -30,9 +30,9 @@
    
    - name: Force Docker to use Systemd
      command: sed -i '\/ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock/c\ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock --exec-opt native.cgroupdriver=systemd' /usr/lib/systemd/system/docker.service
-     with_items: 
-     - systemctl daemon-reload
-     - systemctl restart docker
+   
+   - name: Restart Docker
+     command: systemctl daemon-reload && systemctl restart docker
 
    - name: add Kubernetes apt-key
      apt_key:
