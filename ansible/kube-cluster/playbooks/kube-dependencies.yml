@@ -58,6 +58,9 @@
        name: kubeadm
        state: present
 
+   - name: Disable system swap
+     command: swapoff -a
+
 - hosts: master
   become: yes
   tasks:
@@ -66,6 +69,3 @@
        name: kubectl
        state: present
        force: yes
-       
-   - name: Disable system swap
-     command: swapoff -a
