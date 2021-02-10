@@ -10,5 +10,13 @@
     - name:
       ansible.builtin.debug:
         var: node_status['stdout_lines']
+
+    - name: Get pods 
+      command: kubectl get pods -o wide
+      register: pod_status
+    
+    - name:
+      ansible.builtin.debug:
+        var: pod_status['stdout_lines']
       
       
