@@ -1,7 +1,23 @@
 - hosts: all
+  become: yes
   tasks:
+
     - name: Update APT
-      command: apt-get Update
+      command: apt-get update
+
+    - name: Install sudo
+      comamnd: apt-get install sudo
+
+    - name: allow 'james' to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'james ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Setup authorized SSH Key
+      authorized_key: user=james key="{{item}}"
+      with_file:
+        - ¬/.ssh.id_rsa.pub
 
     - name: Install Python3
       command: apt-get install python3
