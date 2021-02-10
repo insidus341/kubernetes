@@ -1,0 +1,14 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Get cluster nodes
+      command: kubectl get nodes
+      register: node_status
+    
+    - name:
+      ansible.builtin.debug:
+        var: node_status
+      
+      
