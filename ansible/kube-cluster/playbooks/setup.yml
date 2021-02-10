@@ -6,7 +6,7 @@
       command: apt-get update
 
     - name: Install sudo
-      comamnd: apt-get install sudo
+      command: apt-get install sudo
 
     - name: allow 'james' to have passwordless sudo
       lineinfile:
