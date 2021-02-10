@@ -10,6 +10,7 @@
        - ca-certificates
        - gnupg2
        - software-properties-common
+       - curl
 
    - name: add Docker apt-key
      apt_key:
@@ -71,3 +72,20 @@
        name: kubectl
        state: present
        force: yes
+
+   - name: add Helm's APT repository
+     apt_repository:
+       repo: deb https://baltocdn.com/helm/stable/debian/ all main
+       state: present
+       filename: Helm's
+
+   - name: add Helm's APT key
+     apt_key:
+       url: https://baltocdn.com/helm/signing.asc
+       state: present
+       
+   - name: Install Helm
+     apt:
+       name: Helm
+       state: present
+       update_cache: true
