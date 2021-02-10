@@ -12,20 +12,9 @@
        - gnupg2
        - software-properties-common
 
-   - name: add Docker apt-key
-     apt_key:
-       url: https://download.docker.com/linux/debian/gpg
-       state: present
-
-   - name: add Docker's APT repository
-     apt_repository:
-      repo: deb https://download.docker.com/linux/debian buster stable
-      state: present
-      filename: 'docker'
-
    - name: install Docker
      apt:
-       name: docker-ce
+       name: docker.io
        state: present
        update_cache: true
 
