@@ -48,3 +48,5 @@ spec:
             path: /
             port: 80
           periodSeconds: 5
+          timeoutSeconds: 15
+          failureThreshold: 5
