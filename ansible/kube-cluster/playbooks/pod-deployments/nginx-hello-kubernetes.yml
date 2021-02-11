@@ -11,5 +11,11 @@
         src: ~/kubernetes/manifests/nginx-hello-kubernetes
         dest: ~/manifests/
       
-    - name: Add Deployment to Kubernetes Cluster
+    - name: Add first Deployment to Kubernetes Cluster
       command: kubectl apply -f ~/manifests/nginx-hello-kubernetes/hello-kubernetes-first.yml  
+
+    - name: Add second Deployment to Kubernetes Cluster
+      command: kubectl apply -f ~/manifests/nginx-hello-kubernetes/hello-kubernetes-second.yml  
+
+    - name: Add Ingress service
+      command: kubectl apply -f ~/manifests/nginx-hello-kubernetes/hello-kubernetes-ingress.yml
