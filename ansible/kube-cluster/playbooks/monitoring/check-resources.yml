@@ -1,0 +1,14 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Get RAM usage
+      command: free -h
+      register: ram_usage
+    
+    - name:
+      ansible.builtin.debug:
+        var: ram_usage['stdout_lines']
+      
+      
