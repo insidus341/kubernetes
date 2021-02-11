@@ -43,8 +43,8 @@ spec:
           failureThreshold: 10
           periodSeconds: 3
         
-        # livenessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 80
-        #   periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 5
