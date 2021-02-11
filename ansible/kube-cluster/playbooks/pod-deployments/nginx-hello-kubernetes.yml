@@ -1,0 +1,14 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Ensure destination directory exists
+      command: mkdir -p ~/manifests/nginx-hello-kubernetes
+
+    - name: Copy required manifests
+      ansible.builtin.copy:
+        src: ../../manifests/nginx-hello-kubernetes/*
+        dest: ~/manifests/nginx-hello-kubernetes
+      
+      
