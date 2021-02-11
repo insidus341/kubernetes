@@ -21,7 +21,10 @@
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-storage.yml
     
     - name: Create the persistent Volumes
-      command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol*.yml
+      shell: |
+        kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol1.yml
+        kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol2.yml
+        kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol3.yml
     
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
