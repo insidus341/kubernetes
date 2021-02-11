@@ -22,6 +22,10 @@
     
     - name: Create the persistent Volumes
       shell: |
+        mkdir -p /mnt/data/elk1
+        mkdir -p /mnt/data/elk2
+        mkdir -p /mnt/data/elk3
+        
         kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol1.yml
         kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol2.yml
         kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol3.yml
