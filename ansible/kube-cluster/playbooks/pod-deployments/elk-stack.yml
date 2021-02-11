@@ -33,6 +33,9 @@
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
 
+    - name: Start kibana
+      command: kubectl apply -f ~/manifests/elk-stack/kibana.yml
+
 
 
     # - name: Add second Deployment to Kubernetes Cluster
