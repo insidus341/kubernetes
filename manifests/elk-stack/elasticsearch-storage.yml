@@ -5,3 +5,4 @@ metadata:
 
 provisioner: kubernetes.io/no-provisioner
 reclaimPolicy: Retain
+volumeBindingMode: Immediate
