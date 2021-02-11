@@ -1,4 +1,4 @@
-- hosts: master
+- hosts: all
   become: yes
   become_user: james
 
