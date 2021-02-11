@@ -20,6 +20,7 @@ metadata:
   labels:
     app: kibana-nodeport
   name: kibana-nodeport
+  namespace: kube-logging
 spec:
   ports:
   - name: 5601-5601
