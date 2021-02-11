@@ -35,11 +35,12 @@ spec:
         - name: MESSAGE
           value: Hello from the first deployment!
         
-        readinessProbe:
+        startupProbe:
           httpGet:
             path: /
             port: 80
           initialDelaySeconds: 15
+          failureThreshold: 10
           periodSeconds: 3
         
         # livenessProbe:
