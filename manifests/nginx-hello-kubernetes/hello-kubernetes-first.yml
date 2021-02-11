@@ -34,3 +34,16 @@ spec:
         env:
         - name: MESSAGE
           value: Hello from the first deployment!
+        
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 3
+        
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 3
