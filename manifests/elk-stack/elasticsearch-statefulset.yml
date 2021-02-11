@@ -75,7 +75,7 @@ spec:
         app: elasticsearch
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: do-block-storage
+      storageClassName: elk-storage
       resources:
         requests:
-          storage: 500mi
+          storage: 500Mi

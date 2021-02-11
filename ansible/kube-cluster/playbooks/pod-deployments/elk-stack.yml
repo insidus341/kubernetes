@@ -16,6 +16,9 @@
 
     - name: Add elasticsearch service
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-svc.yml
+
+    - name: Ensure the persistentVolume is made
+      command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol.yml
     
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
