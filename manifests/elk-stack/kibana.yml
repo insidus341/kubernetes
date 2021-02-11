@@ -28,7 +28,7 @@ spec:
     protocol: TCP
     targetPort: 5601
   selector:
-    app: kibana-nodeport
+    app: kibana
   type: NodePort
 
 ---
