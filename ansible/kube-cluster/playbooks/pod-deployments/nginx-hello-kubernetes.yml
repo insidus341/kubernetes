@@ -8,7 +8,7 @@
 
     - name: Copy required manifests
       ansible.builtin.copy:
-        src: ../../manifests/nginx-hello-kubernetes/*
+        src: /manifests/nginx-hello-kubernetes/*
         dest: ~/manifests/nginx-hello-kubernetes
       
       
