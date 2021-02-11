@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "~/data/elk2"
+    path: "/home/james/data/elk2"
