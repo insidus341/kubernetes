@@ -12,9 +12,17 @@ spec:
       - backend:
           serviceName: hello-kubernetes-first
           servicePort: 80
+
   - host: my.domain.com
     http:
       paths:
       - backend:
           serviceName: hello-kubernetes-second
+          servicePort: 80
+
+  - host: james-home.duckdns.org
+    http:
+      paths:
+      - backend:
+          serviceName: hello-kubernetes-first
           servicePort: 80
