@@ -20,9 +20,6 @@
     - name: Ensure the storageclass is made
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-storage.yml
     
-    - name: Create the persistent Volumes
-      command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-persistent-vol.yml
-    
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
 
