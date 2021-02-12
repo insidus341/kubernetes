@@ -6,7 +6,7 @@ metadata:
 
 spec:
   serviceName: elasticsearch
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: elasticsearch
@@ -18,14 +18,15 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-            matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - elasticsearch
-          topologyKey: "kubernetes.io/hostname"
+          preferredDuringSchedulingIgnoredDuringExecution:
+            podAffinityTerm:
+            - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - elasticsearch
+            topologyKey: "kubernetes.io/hostname"
 
       containers:
       - name: elasticsearch
