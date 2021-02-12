@@ -33,6 +33,23 @@ spec:
 
 ---
 
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: my.domain.com
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
+          
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
