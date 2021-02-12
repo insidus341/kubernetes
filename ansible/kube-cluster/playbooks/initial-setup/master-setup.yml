@@ -1,12 +1,11 @@
 - hosts: master
   become: yes
+  become_user: james
   tasks:
     - name: initialize the cluster
       shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all >> cluster_initialized.txt
 
     - name: create .kube directory
-      become: yes
-      become_user: james
       file:
         path: $HOME/.kube
         state: directory
@@ -20,18 +19,28 @@
         owner: james
 
     - name: install Pod network
-      become: yes
-      become_user: james
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
       args:
         chdir: $HOME
         creates: pod_network_setup.txt
 
-    - name: Install HAProxy Ingress
+    - name: Copy configmap for local load balancer
+      ansible.builtin.copy:
+        src: ~/kubernetes/manifests/metallb
+        dest: ~/manifests/
+
+    - name: Install a local load balancer (only needed for test deployments)
+      shell: |
+        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+        kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+        kubectl apply -f ~/manifests/metallb/configmap.yml
+    
+    - name: Install Ingress
       shell: |
         helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
         helm repo update
         helm install ingress-nginx ingress-nginx/ingress-nginx --set controller.publishService.enabled=true
-
+    
 
 

@@ -1,53 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  creationTimestamp: null
   labels:
-    app: nginx
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-  selector:
-    app: kibana
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: nginx
-  name: nginx
+    app: nginx-loadbalancer
+  name: nginx-loadbalancer
 spec:
   ports:
   - name: 80-80
-    port: 80
     protocol: TCP
+    port: 80
     targetPort: 80
-    nodePort: 32000
-
   selector:
     app: nginx
-  type: NodePort
+  type: LoadBalancer
+  loadBalancerIP: 192.168.10.200
 
----
-
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: nginx-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-  - host: my.domain.com
-    http:
-      paths:
-      - backend:
-          serviceName: nginx
-          servicePort: 80
-          
 ---
 
 apiVersion: apps/v1
