@@ -6,7 +6,7 @@ metadata:
   labels:
     app: kibana
 spec:
-  type: ClusterIP
+  type: ExternalName
   ports:
   - port: 5601
   selector:
