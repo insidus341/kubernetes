@@ -25,6 +25,7 @@ spec:
                 operator: In
                 values:
                 - elasticsearch
+          topologyKey: "kubernetes.io/hostname"
 
       containers:
       - name: elasticsearch
