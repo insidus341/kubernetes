@@ -32,6 +32,9 @@
     - name: Start kibana
       command: kubectl apply -f ~/manifests/elk-stack/kibana.yml
 
+    - name: Start the filebeat daemon
+      command: kubectl apply -f ~/manifests/elk-stack/filebeat-daemon.yml
+
 
 
     # - name: Add second Deployment to Kubernetes Cluster
