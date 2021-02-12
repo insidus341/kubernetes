@@ -18,7 +18,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: kibana.domain.com
+          serviceName: kibana
           servicePort: 80
   
 ---
