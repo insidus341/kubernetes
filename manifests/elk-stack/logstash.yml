@@ -21,7 +21,16 @@ metadata:
   labels:
     app: logstash
 spec:
-  affinity:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash
+  template:
+    metadata:
+      labels:
+        app: logstash
+    spec:
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
@@ -33,16 +42,7 @@ spec:
                   values:
                   - logstash
               topologyKey: "kubernetes.io/hostname"
-
-  replicas: 1
-  selector:
-    matchLabels:
-      app: logstash
-  template:
-    metadata:
-      labels:
-        app: logstash
-    spec:
+              
       containers:
       - name: logstash
         image: docker.elastic.co/logstash/logstash:6.3.0

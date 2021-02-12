@@ -61,7 +61,16 @@ metadata:
   labels:
     app: kibana
 spec:
-  affinity:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
@@ -73,16 +82,7 @@ spec:
                   values:
                   - kibana
               topologyKey: "kubernetes.io/hostname"
-
-  replicas: 2
-  selector:
-    matchLabels:
-      app: kibana
-  template:
-    metadata:
-      labels:
-        app: kibana
-    spec:
+              
       containers:
       - name: kibana
         image: docker.elastic.co/kibana/kibana:7.2.0
