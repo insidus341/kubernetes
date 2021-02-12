@@ -23,6 +23,12 @@
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
 
+    - name: Create configmap for Logstash
+      command: kubectl apply -f ~/manifests/elk-stack/logstash-configmap.yml
+
+    - name: Initilize logstash
+      command: kubectl apply -f ~/manifests/elk-stack/logstash.yml
+
     - name: Start kibana
       command: kubectl apply -f ~/manifests/elk-stack/kibana.yml
 
