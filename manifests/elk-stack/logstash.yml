@@ -30,19 +30,6 @@ spec:
       labels:
         app: logstash
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - logstash
-              topologyKey: "kubernetes.io/hostname"
-              
       containers:
       - name: logstash
         image: docker.elastic.co/logstash/logstash:6.3.0
