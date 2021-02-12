@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: logstash-service
-  namespace: kube-loggin
+  namespace: kube-logging
 spec:
   selector:
     app: logstash
