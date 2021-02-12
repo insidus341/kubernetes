@@ -18,8 +18,8 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: kibana
-          servicePort: 80
+          serviceName: ext_kibana
+          servicePort: 5601
   
 ---
 
