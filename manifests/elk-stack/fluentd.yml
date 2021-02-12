@@ -42,6 +42,25 @@ subjects:
 
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config-volume
+  namespace: kube-logging
+data:
+  my.conf: |
+    <match fluent.**>
+    @type file
+    path /var/log/my-fluentd.log
+    time_slice_format %Y%m%d
+    time_slice_wait 10m
+    time_format %Y%m%dT%H%M%S%z
+    compress gzip
+    utc
+    </match>;
+
+---
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -87,6 +106,9 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
+        - name: fluentd-config-volume
+          mountPath: /fluentd/etc/conf.d/my.conf
+          subPath: my.conf
       terminationGracePeriodSeconds: 30
       volumes:
       - name: varlog
