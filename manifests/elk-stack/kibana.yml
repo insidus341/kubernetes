@@ -14,42 +14,42 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: kibana-nodeport
-  name: kibana-nodeport
-  namespace: kube-logging
-spec:
-  ports:
-  - name: 5601-5601
-    port: 5601
-    protocol: TCP
-    targetPort: 5601
-    nodePort: 32010
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: kibana-nodeport
+#   name: kibana-nodeport
+#   namespace: kube-logging
+# spec:
+#   ports:
+#   - name: 5601-5601
+#     port: 5601
+#     protocol: TCP
+#     targetPort: 5601
+#     nodePort: 32010
 
-  selector:
-    app: kibana
-  type: NodePort
+#   selector:
+#     app: kibana
+#   type: NodePort
 
 ---
 
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: kibana-ingress
-  namespace: kube-logging
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-  - host: kibana.domain.com
-    http:
-      paths:
-      - backend:
-          serviceName: kibana
-          servicePort: 5601
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: kibana-ingress
+#   namespace: kube-logging
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+# spec:
+#   rules:
+#   - host: kibana.domain.com
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: kibana
+#           servicePort: 5601
 
 ---
 
