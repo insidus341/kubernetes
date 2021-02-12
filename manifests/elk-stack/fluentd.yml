@@ -45,7 +45,7 @@ subjects:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fluentd-config-volume
+  name: fluentd-conf
   namespace: kube-logging
 data:
   my.conf: |
@@ -117,3 +117,6 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
+      - name: fluentd-config-volume
+        configMap:
+          name: fluentd-conf
