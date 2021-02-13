@@ -102,7 +102,7 @@ spec:
         - containerPort: 5601
         startupProbe:
           httpGet:
-            path: /app
+            path: /app/kibana#/home?_g=()
             port: 5601
           failureThreshold: 30
           periodSeconds: 10
