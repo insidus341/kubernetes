@@ -56,7 +56,7 @@ data:
         @type tail
         path /var/log/containers/nginx-*.log
 
-        pos_file /var/log/fluentd-containers.log.pos
+        pos_file /var/log/nginx-containers.log.pos
         time_format %Y-%m-%dT%H:%M:%S.%NZ
         tag nginx.*
         format json
