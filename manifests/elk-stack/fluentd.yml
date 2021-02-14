@@ -54,9 +54,7 @@ data:
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
         tag nginx.*
-        format json
-        read_from_head false
-
+        
         <parse>
             @type nginx
             expression /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
@@ -81,7 +79,7 @@ data:
         logstash_prefix nginx
         logstash_format "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_FORMAT'] || 'true'}"
         type_name "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_TYPE_NAME'] || 'fluentd'}"
-        
+
         <buffer>
           flush_thread_count "#{ENV['FLUENT_ELASTICSEARCH_BUFFER_FLUSH_THREAD_COUNT'] || '8'}"
           flush_interval "#{ENV['FLUENT_ELASTICSEARCH_BUFFER_FLUSH_INTERVAL'] || '5s'}"
@@ -105,7 +103,7 @@ spec:
   selector:
     matchLabels:
       app: fluentd
-    
+
   template:
     metadata:
       labels:
