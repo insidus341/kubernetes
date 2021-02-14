@@ -40,7 +40,7 @@ metadata:
   labels:
     app: kibana
 spec:
-  replicas: 1
+  replicas: 
   selector:
     matchLabels:
       app: kibana
@@ -66,5 +66,5 @@ spec:
           httpGet:
             path: /app/kibana#/home?_g=()
             port: 5601
-          failureThreshold: 30
-          periodSeconds: 10
+          failureThreshold: 6
+          periodSeconds: 30
