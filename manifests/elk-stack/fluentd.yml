@@ -59,6 +59,9 @@ data:
         format json
         read_from_head false
     </source>
+    <parse>
+        @type nginx
+    </parse>
     <match nginx.**>
         @type elasticsearch
         include_tag_key true
