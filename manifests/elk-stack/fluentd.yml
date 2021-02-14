@@ -42,25 +42,24 @@ subjects:
 
 ---
 
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: fluentd-conf
-#   namespace: kube-logging
-# data:
-#   my.conf: |
-#     <match fluent.**>
-#     @type file
-#     path /var/log/my-fluentd.log
-#     time_slice_format %Y%m%d
-#     time_slice_wait 10m
-#     time_format %Y%m%dT%H%M%S%z
-#     compress gzip
-#     utc
-#     </match>
-#     <% end %>
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-conf
+  namespace: kube-logging
+data:
+  my.conf: |
+    <match fluent.**>
+    @type file
+    path /var/log/my-fluentd.log
+    time_slice_format %Y%m%d
+    time_slice_wait 10m
+    time_format %Y%m%dT%H%M%S%z
+    compress gzip
+    utc
+    </match>
 
-# ---
+---
 
 apiVersion: apps/v1
 kind: DaemonSet
