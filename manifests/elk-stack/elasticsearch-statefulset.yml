@@ -59,7 +59,7 @@ spec:
           - name: cluster.initial_master_nodes
             value: "es-cluster-0,es-cluster-1"
           - name: ES_JAVA_OPTS
-            value: "-Xms128m -Xmx128m"
+            value: "-Xms512m -Xmx512m"
       
       initContainers:
       - name: fix-permissions
