@@ -56,10 +56,12 @@ data:
         tag nginx.*
         format json
         read_from_head false
+
+        <parse>
+            @type nginx
+        </parse>
     </source>
-    <parse>
-        @type nginx
-    </parse>
+
     <match nginx.**>
         @type elasticsearch
         include_tag_key true
