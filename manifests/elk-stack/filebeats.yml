@@ -58,12 +58,15 @@ metadata:
   name: filebeat
   namespace: kube-logging
   labels:
-    k8s-app: filebeat
+    app: filebeat
 spec:
+  selector:
+    matchLabels:
+      app: filebeat
   template:
     metadata:
       labels:
-        k8s-app: filebeat
+        app: filebeat
     spec:
       serviceAccountName: filebeat
       terminationGracePeriodSeconds: 30
@@ -79,10 +82,10 @@ spec:
           value: elasticsearch
         - name: ELASTICSEARCH_PORT
           value: "9200"
-        # - name: ELASTICSEARCH_USERNAME
-        #   value: elastic
-        # - name: ELASTICSEARCH_PASSWORD
-        #   value: changeme
+        - name: ELASTICSEARCH_USERNAME
+          value: 
+        - name: ELASTICSEARCH_PASSWORD
+          value: 
         - name: ELASTIC_CLOUD_ID
           value:
         - name: ELASTIC_CLOUD_AUTH
