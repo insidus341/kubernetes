@@ -54,9 +54,10 @@ data:
         format json
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
+        tag nginx
     </source>
 
-    <filter *>
+    <filter nginx.*>
       @type parser
       key_name log
       <parse>
