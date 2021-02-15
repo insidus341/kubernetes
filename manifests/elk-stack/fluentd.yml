@@ -53,13 +53,10 @@ data:
         @type tail
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
-        tag nginx.*
-        
-        format json
-        @log_level debug
+        tag nginx
     </source>
 
-    <match nginx.**>
+    <match nginx>
         @type elasticsearch
         logstash_format true
         index_name nginx
