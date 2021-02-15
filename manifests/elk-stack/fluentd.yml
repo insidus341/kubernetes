@@ -59,7 +59,6 @@ data:
 
     <match nginx.*>
         @type elasticsearch
-        @id out_es
         @log_level info
 
         include_tag_key true
