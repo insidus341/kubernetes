@@ -51,13 +51,10 @@ data:
   my.conf: |
     <source>
         @type tail
+        @type json
         path /var/log/containers/nginx-*.log
-        pos_file /var/log/nginx-containers.log.pos
+        pos_file /var/log/nginx-containers_2.log.pos
         tag nginx
-
-        <parse>
-            @type nginx
-        </parse>
     </source>
 
     <match nginx>
