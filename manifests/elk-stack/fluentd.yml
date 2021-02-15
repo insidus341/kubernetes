@@ -57,7 +57,7 @@ data:
         tag nginx
     </source>
 
-    <match **>
+    <match nginx.*>
         @type elasticsearch
         @id out_es
         @log_level info
