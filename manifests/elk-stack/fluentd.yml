@@ -55,11 +55,14 @@ data:
         pos_file /var/log/nginx-containers.log.pos
         tag nginx.*
         
-        format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
+        read_from_head true
+        <parse>
+            @type nginx
+            expression /(?<host>[^ ]*) \[(?<time>[^\]]*)\] \[Cache:(?<cache>\b\w+\b)\] "(?<CSMethod>\b\w+\b) (?<CSURIStem>(?:\/[A-Za-z0-9$.+!*'(){},~:;=@#%&_\-]*)+) (?<request>.*?)" (?<SCStatus>(?:(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))))) (?<image_size>(?:(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))))) "(?<referer>.*?)" "(?<user_agent>.*?)" "(?<xforward>.*?)" (?<request_time>(?:(?:(?<![0-9.+-])(?>[+-]?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+)))))) (?<upstream_response>.*?) (?<upstream_connect>.*?) (?<upstream_header>.*)/
+            time_format %d/%b/%Y:%H:%M:%S %z
+        </parse>
         
-        # <parse>
-        #     @type nginx
-        # </parse>
+        @log_level debug
     </source>
 
     <match nginx.**>
