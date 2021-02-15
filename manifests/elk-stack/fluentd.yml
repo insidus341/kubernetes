@@ -51,6 +51,7 @@ data:
   my.conf: |
     <source>
         @type tail
+        @nginx
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
         tag nginx
