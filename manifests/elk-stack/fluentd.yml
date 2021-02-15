@@ -57,7 +57,7 @@ data:
         tag nginx
     </source>
 
-    <filter nginx>
+    <filter nginx.**>
       @type parser
       key_name log
       <parse>
