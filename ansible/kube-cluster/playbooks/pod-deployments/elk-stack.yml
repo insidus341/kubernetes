@@ -23,11 +23,11 @@
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
 
-    # - name: Start fluentd 
-    #   command: kubectl apply -f ~/manifests/elk-stack/fluentd.yml
+    - name: Start fluentd 
+      command: kubectl apply -f ~/manifests/elk-stack/fluentd.yml
 
     - name: Start kibana
       command: kubectl apply -f ~/manifests/elk-stack/kibana.yml
 
-    - name: Start the filebeat daemon
-      command: kubectl apply -f ~/manifests/elk-stack/filebeats.yml
+    # - name: Start the filebeat daemon
+    #   command: kubectl apply -f ~/manifests/elk-stack/filebeats.yml
