@@ -55,16 +55,12 @@ data:
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers_2.log.pos
         tag nginx
-        <format>
-            @type json
-        </format>
     </source>
 
     <match nginx>
         @type elasticsearch
         logstash_format true
         index_name nginx
-        type_name nginx
 
         host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
         port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
@@ -76,8 +72,7 @@ data:
         reconnect_on_error "#{ENV['FLUENT_ELASTICSEARCH_RECONNECT_ON_ERROR'] || 'true'}"
         reload_on_failure "#{ENV['FLUENT_ELASTICSEARCH_RELOAD_ON_FAILURE'] || 'true'}"
         log_es_400_reason "#{ENV['FLUENT_ELASTICSEARCH_LOG_ES_400_REASON'] || 'false'}"
-        logstash_prefix nginx
-        logstash_format "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_FORMAT'] || 'true'}"
+        logstash_prefix logstash
 
         <buffer>
           flush_thread_count "#{ENV['FLUENT_ELASTICSEARCH_BUFFER_FLUSH_THREAD_COUNT'] || '8'}"
