@@ -30,4 +30,4 @@
       command: kubectl apply -f ~/manifests/elk-stack/kibana.yml
 
     - name: Start the filebeat daemon
-      command: kubectl apply -f ~/manifests/elk-stack/filebeat.yml
+      command: kubectl apply -f ~/manifests/elk-stack/filebeats.yml
