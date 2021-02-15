@@ -135,9 +135,9 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
-        - name: fluentd-config-volume
-          mountPath: /fluentd/etc/conf.d/my.conf
-          subPath: my.conf
+        # - name: fluentd-config-volume
+        #   mountPath: /fluentd/etc/conf.d/my.conf
+        #   subPath: my.conf
       terminationGracePeriodSeconds: 30
       volumes:
       - name: varlog
