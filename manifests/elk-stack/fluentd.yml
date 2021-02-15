@@ -55,9 +55,11 @@ data:
         pos_file /var/log/nginx-containers.log.pos
         tag nginx.*
         
-        <parse>
-            @type nginx
-        </parse>
+        format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
+        
+        # <parse>
+        #     @type nginx
+        # </parse>
     </source>
 
     <match nginx.**>
