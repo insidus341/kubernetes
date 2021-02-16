@@ -90,10 +90,10 @@ data:
     <filter kubernetes-nginx.**>
       @type record_transformer
       <record>
-        nginx.body_bytes_sent ${record['body_bytes_sent']}
+        nginx-body_bytes_sent ${record["body_bytes_sent"]}
       </record>
       <record>
-        nginx.hostname ${record['hostname']}
+        nginx.hostname ${record["hostname"]}
       </record>
     </filter>
 
