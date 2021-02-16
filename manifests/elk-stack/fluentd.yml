@@ -49,7 +49,7 @@ metadata:
   namespace: kube-logging
 data:
 
-  fluentd.conf: |
+  fluent.conf: |
     // Main configuration
     @include nginx.conf
     @include kubernetes.conf
