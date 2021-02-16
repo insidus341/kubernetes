@@ -119,13 +119,17 @@ data:
         nginx.useragent ${record["useragent"]}
       </record>
       
-      tag ${tag}.formatted.*
+      tag kubernetes-nginx.formatted.*
     </filter>
 
     # <match kubernetes-nginx.**>
     #   @type file
     #   path /tmp/nginx-test.log
     # </match>
+
+    <match kubernetes-nginx.**>
+      @type null
+    </match>
 
     <match kubernetes-nginx.formatted.**>
       @type elasticsearch
