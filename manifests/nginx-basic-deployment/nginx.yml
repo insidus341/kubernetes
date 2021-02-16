@@ -35,23 +35,48 @@ kind: ConfigMap
 metadata:
   name: nginx-config
 data:
+  nginx.conf: |-
+    http {
+      include       /etc/nginx/mime.types;
+      default_type  application/octet-stream;
+
+      log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
+
+      sendfile        on;
+      #tcp_nopush     on;
+
+      keepalive_timeout  65;
+
+      #gzip  on;
+
+      include /etc/nginx/conf.d/*.conf;
+    }	
+
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-site
+data:
   default.conf: |-
     server {
-        listen       80;
-        server_name  localhost;
+      listen       80;
+      server_name  localhost;
 
-        # log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
-        # access_log  /var/log/nginx/host.access.log  nginx_log;
+      # log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
+      # access_log  /var/log/nginx/host.access.log  nginx_log;
 
-        location / {
-            root   /usr/share/nginx/html;
-            index  index.html index.htm;
-        }
+      location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+      }
 
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   /usr/share/nginx/html;
-        }
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+          root   /usr/share/nginx/html;
+      }
     }
 
 ---
@@ -90,9 +115,14 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: nginx-config
-          mountPath: /etc/nginx/conf.d
+          mountPath: /etc/nginx
+        - name: nginx-site
+          mountPath: /etc/nginx
     
       volumes:
       - name: nginx-config
         configMap:
           name: nginx-config
+      - name: nginx-site
+        configMap:
+          name: nginx-site
