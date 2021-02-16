@@ -30,6 +30,38 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |-
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
+    }		
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        access_log  /var/log/nginx/host.access.log  nginx_log;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,3 +94,11 @@ spec:
         image: nginx:1.14.2
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+    
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
