@@ -57,10 +57,16 @@ data:
   nginx.conf: |-
     <source>
         @type tail
-        format json
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
-        tag kubernetes-nginx
+        tag kubernetes-nginx.*
+        read_from_head true
+
+        <parse>
+          @type "#{ENV['FLUENT_CONTAINER_TAIL_PARSER_TYPE'] || 'json'}"
+          time_format %Y-%m-%dT%H:%M:%S.%NZ
+        </parse>
+
     </source>
 
     # <filter kubernetes.nginx.**>
