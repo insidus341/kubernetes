@@ -36,11 +36,22 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: |-
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+
+    events {
+        worker_connections  1024;
+    }
+
     http {
       include       /etc/nginx/mime.types;
       default_type  application/octet-stream;
 
-      log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
+      log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri';
 
       sendfile        on;
       #tcp_nopush     on;
@@ -64,9 +75,8 @@ data:
     server {
       listen       80;
       server_name  localhost;
-
-      # log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
-      # access_log  /var/log/nginx/host.access.log  nginx_log;
+      
+      access_log  /var/log/nginx/host.access.log  nginx_log;
 
       location / {
           root   /usr/share/nginx/html;
