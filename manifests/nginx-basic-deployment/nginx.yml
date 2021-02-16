@@ -48,7 +48,7 @@ data:
     }
 
     http {
-      include       /etc/nginx/mime.types;
+      #include       /etc/nginx/mime.types;
       default_type  application/octet-stream;
 
       log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri';
