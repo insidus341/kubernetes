@@ -63,19 +63,19 @@ data:
         tag kubernetes.nginx
     </source>
 
-    <filter kubernetes.nginx.**>
-      # @type parser
-      # key_name log
-      @type kubernetes_metadata
-
-      # <parse>
-      #   @type nginx
-      # </parse>
-    </filter>
-
-    # <filter kubernetes.**>
+    # <filter kubernetes.nginx.**>
+    #   # @type parser
+    #   # key_name log
     #   @type kubernetes_metadata
+
+    #   # <parse>
+    #   #   @type nginx
+    #   # </parse>
     # </filter>
+
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
 
     <match kubernetes.nginx.**>
       @type file
