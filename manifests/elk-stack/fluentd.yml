@@ -119,7 +119,7 @@ data:
         nginx.useragent ${record["useragent"]}
       </record>
       
-      tag ${tag}.formatted
+      tag ${tag}.formatted.*
     </filter>
 
     # <match kubernetes-nginx.**>
