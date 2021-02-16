@@ -118,6 +118,8 @@ data:
       <record>
         nginx.useragent ${record["useragent"]}
       </record>
+      
+      tag ${tag}.formatted
     </filter>
 
     # <match kubernetes-nginx.**>
@@ -125,11 +127,10 @@ data:
     #   path /tmp/nginx-test.log
     # </match>
 
-    <match kubernetes-nginx.**>
+    <match kubernetes-nginx.formatted.**>
       @type elasticsearch
       @log_level info
       include_tag_key true
-      add_tag_prefix nginx
 
       host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
