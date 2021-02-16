@@ -65,18 +65,20 @@ data:
 
     <filter kubernetes.nginx.**>
       @type parser
-      key_name log
+      # key_name log
+      @type kubernetes_metadata
+      @id filter_kube_metadata
 
-      <parse>
-        @type nginx
-      </parse>
-      
-      <parse>  
-        @type kubernetes_metadata
-        @id filter_kube_metadata
-      </parse>
+      # <parse>
+      #   @type nginx
+      # </parse>
     </filter>
 
+    # <filter kubernetes.**>
+    #   @type kubernetes_metadata
+    #   @id filter_kube_metadata
+    # </filter>
+    
     <match kubernetes.nginx.**>
       @type file
       path /tmp/nginx-test.log
