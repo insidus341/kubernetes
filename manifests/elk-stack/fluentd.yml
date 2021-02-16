@@ -74,7 +74,8 @@ data:
 
       <parse>
         @type regexp
-        expression ^\[(?<logtime>[^\]]*)\] \- (?<server_addr>[^ ]*) (?<port>[^ ]*) (?<remote_addr>[^ ]*) (?<hostname>[^ ]*) (?<request_method>[^ ]*) (?<uri>[^ ]*) (?<status>[^ ]*) (?<response_time>[^ ]*) (?<body_bytes_sent>[^ ]*) \\"(?<user_agent>[^\"]*)\"
+        @type json
+        expression ^\[(?<logtime>[^\]]*)\] \- (?<server_addr>[^ ]*) (?<port>[^ ]*) (?<remote_addr>[^ ]*) (?<hostname>[^ ]*) (?<request_method>[^ ]*) (?<uri>[^ ]*) (?<status>[^ ]*) (?<response_time>[^ ]*) (?<body_bytes_sent>[^ ]*) \\"(?<user_agent>[^\"]*)\"\\n
         time_format %d/%b/%Y:%H:%M:%S %z
       </parse>
     </filter>
