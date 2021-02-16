@@ -106,7 +106,7 @@ data:
     #   path /tmp/nginx-test.log
     # </match>
 
-    <match kubernetes-nginx.formatted.*>
+    <match kubernetes-nginx.**>
       @type elasticsearch
       @log_level info
       include_tag_key true
