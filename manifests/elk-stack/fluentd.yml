@@ -127,10 +127,6 @@ data:
     #   path /tmp/nginx-test.log
     # </match>
 
-    <match kubernetes-nginx.**>
-      @type null
-    </match>
-
     <match kubernetes-nginx.formatted.**>
       @type elasticsearch
       @log_level info
@@ -159,6 +155,10 @@ data:
         retry_max_interval "#{ENV['FLUENT_ELASTICSEARCH_BUFFER_RETRY_MAX_INTERVAL'] || '30'}"
         retry_forever true
       </buffer>
+    </match>
+
+    <match kubernetes-nginx.**>
+      @type null
     </match>
 
 ---
