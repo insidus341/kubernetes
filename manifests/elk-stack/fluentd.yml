@@ -97,9 +97,9 @@ data:
         nginx.response_time ${record["response_time"]}
         nginx.body_bytes_sent ${record["body_bytes_sent"]}
         nginx.useragent ${record["useragent"]}
-
-        remove_keys logtime,server_addr,port,remote_addr,hostname,request_method,uri,status,response_time,body_bytes_sent,useragent
       </record>
+
+      remove_keys logtime,server_addr,port,remote_addr,hostname,request_method,uri,status,response_time,body_bytes_sent,useragent
     </filter>
 
     # <match kubernetes-nginx.**>
