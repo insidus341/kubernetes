@@ -69,11 +69,13 @@ data:
     </source>
 
     <filter kubernetes-nginx.**>
-      @type parser
+      @type regexp
       key_name log
 
       <parse>
-        @type nginx
+        # @type nginx
+        expression /^\[(?<logtime>[^\]]*)\] \- (?<server_addr>[^ ]*) (?<port>[^ ]*) (?<remote_addr>[^ ]*) (?<hostname>[^ ]*) (?<request_method>[^ ]*) (?<uri>[^ ]*) (?<status>[^ ]*) (?<response_time>[^ ]*) (?<body_bytes_sent>[^ ]*) "(?<user_agent>[^\"]*)"$/
+        time_format %d/%b/%Y:%H:%M:%S %z
       </parse>
     </filter>
 

@@ -52,6 +52,7 @@ data:
       default_type  application/octet-stream;
 
       log_format nginx_log '[$time_local] - $server_addr $server_port $remote_addr $hostname $request_method $uri $status $request_time $body_bytes_sent "$http_user_agent"';
+      access_log /var/log/nginx/access.log log_format;
 
       sendfile        on;
       #tcp_nopush     on;
@@ -76,7 +77,7 @@ data:
       listen       80;
       server_name  localhost;
       
-      access_log  /var/log/nginx/host.access.log  nginx_log;
+      # access_log  /var/log/nginx/host.access.log  nginx_log;
 
       location / {
           root   /usr/share/nginx/html;
