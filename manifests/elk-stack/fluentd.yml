@@ -96,6 +96,7 @@ data:
       @type elasticsearch
       @log_level info
       include_tag_key true
+      add_tag_prefix nginx
 
       host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
       port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
