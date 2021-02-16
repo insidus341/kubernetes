@@ -87,39 +87,19 @@ data:
       @type record_transformer
       <record>
         nginx.logtime ${record["logtime"]}
-      </record>
-      <record>
         nginx.server_addr ${record["server_addr"]}
-      </record>
-      <record>
         nginx.port ${record["port"]}
-      </record>
-      <record>
         nginx.remote_addr ${record["remote_addr"]}
-      </record>
-      <record>
         nginx.hostname ${record["hostname"]}
-      </record>
-      <record>
         nginx.request_method ${record["request_method"]}
-      </record>
-      <record>
         nginx.uri ${record["uri"]}
-      </record>
-      <record>
         nginx.status ${record["status"]}
-      </record>
-      <record>
         nginx.response_time ${record["response_time"]}
-      </record>
-      <record>
         nginx.body_bytes_sent ${record["body_bytes_sent"]}
-      </record>
-      <record>
         nginx.useragent ${record["useragent"]}
+
+        tag kubernetes-nginx.formatted.*
       </record>
-      
-      tag kubernetes-nginx.formatted.*
     </filter>
 
     # <match kubernetes-nginx.**>
