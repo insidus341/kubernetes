@@ -36,17 +36,11 @@ metadata:
   name: nginx-config
 data:
   default.conf: |-
-    http {
-        include       /etc/nginx/mime.types;
-        default_type  application/octet-stream;
-
-        log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
-    }		
-
     server {
         listen       80;
         server_name  localhost;
 
+        log_format nginx_log '[$time_local] - $remote_addr $upstream_addr $request_method $hostname $request_uri $status $body_bytes_sent "$http_user_agent" $upstream_response_time $uri'
         access_log  /var/log/nginx/host.access.log  nginx_log;
 
         location / {
