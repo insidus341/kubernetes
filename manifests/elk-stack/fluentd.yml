@@ -92,7 +92,7 @@ data:
     #   path /tmp/nginx-test.log
     # </match>
 
-    <match **>
+    <match kubernetes-nginx.**>
       @type elasticsearch
       @id out_es
       @log_level info
