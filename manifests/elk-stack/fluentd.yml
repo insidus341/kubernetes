@@ -87,6 +87,16 @@ data:
       @type kubernetes_metadata
     </filter>
 
+    <filter kubernetes-nginx.**>
+      @type record_transformer
+      <record>
+        nginx.body_bytes_sent ${record['body_bytes_sent']}
+      </record>
+      <record>
+        nginx.hostname ${record['hostname']}
+      </record>
+    </filter>
+
     # <match kubernetes-nginx.**>
     #   @type file
     #   path /tmp/nginx-test.log
