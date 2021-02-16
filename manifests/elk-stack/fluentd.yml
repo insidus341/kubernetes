@@ -69,7 +69,6 @@ data:
     </source>
 
     <filter kubernetes-nginx.**>
-      @type regexp
       key_name log
 
       <parse>
