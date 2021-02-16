@@ -153,7 +153,7 @@ spec:
             memory: 100Mi
         volumeMounts:
         - name: fluentd-config
-          mountPath: /fluentd/etc/
+          mountPath: /fluentd/etc
         - name: varlog
           mountPath: /var/log
         - name: varlibdockercontainers
