@@ -76,10 +76,6 @@ data:
         @type regexp
         expression /^\[(?<logtime>[^\]]*)\] \- (?<server_addr>[^ ]*) (?<port>[^ ]*) (?<remote_addr>[^ ]*) (?<hostname>[^ ]*) (?<request_method>[^ ]*) (?<uri>[^ ]*) (?<status>[^ ]*) (?<response_time>[^ ]*) (?<body_bytes_sent>[^ ]*) "(?<useragent>[^\"]*)"$/
         time_format %d/%b/%Y:%H:%M:%S %z
-        # @type nginx
-        # @type regexp
-        # expression /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)"(?:\s+(?<http_x_forwarded_for>[^ ]+))?)?$/
-        # time_format %d/%b/%Y:%H:%M:%S %z
       </parse>
     </filter>
 
@@ -90,10 +86,37 @@ data:
     <filter kubernetes-nginx.**>
       @type record_transformer
       <record>
-        nginx-body_bytes_sent ${record["body_bytes_sent"]}
+        nginx.logtime ${record["logtime"]}
+      </record>
+      <record>
+        nginx.server_addr ${record["server_addr"]}
+      </record>
+      <record>
+        nginx.port ${record["port"]}
+      </record>
+      <record>
+        nginx.remote_addr ${record["remote_addr"]}
       </record>
       <record>
         nginx.hostname ${record["hostname"]}
+      </record>
+      <record>
+        nginx.request_method ${record["request_method"]}
+      </record>
+      <record>
+        nginx.uri ${record["uri"]}
+      </record>
+      <record>
+        nginx.status ${record["status"]}
+      </record>
+      <record>
+        nginx.response_time ${record["response_time"]}
+      </record>
+      <record>
+        nginx.body_bytes_sent ${record["body_bytes_sent"]}
+      </record>
+      <record>
+        nginx.useragent ${record["useragent"]}
       </record>
     </filter>
 
