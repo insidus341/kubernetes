@@ -69,6 +69,10 @@ data:
     </source>
 
     <filter kubernetes-nginx.**>
+      @type kubernetes_metadata
+    </filter>
+
+    <filter kubernetes-nginx.**>
       @type parser
       key_name log
 
@@ -77,9 +81,7 @@ data:
       </parse>
     </filter>
 
-    <filter kubernetes-nginx.**>
-      @type kubernetes_metadata
-    </filter>
+    
 
     <match kubernetes-nginx.**>
       @type file
