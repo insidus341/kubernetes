@@ -23,6 +23,9 @@
     - name: Add elasticsearch StatefulSet
       command: kubectl apply -f ~/manifests/elk-stack/elasticsearch-statefulset.yml
 
+    - name: Remove Fluentd DaemonSet
+      command: kubectl -n kube-logging delete ds fluentd
+    
     - name: Start fluentd 
       command: kubectl apply -f ~/manifests/elk-stack/fluentd.yml
 
