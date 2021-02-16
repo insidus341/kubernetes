@@ -66,18 +66,16 @@ data:
           @type "#{ENV['FLUENT_CONTAINER_TAIL_PARSER_TYPE'] || 'json'}"
           time_format %Y-%m-%dT%H:%M:%S.%NZ
         </parse>
-
     </source>
 
-    # <filter kubernetes.nginx.**>
-    #   # @type parser
-    #   # key_name log
-    #   @type kubernetes_metadata
+    <filter kubernetes-nginx.**>
+      @type parser
+      key_name log
 
-    #   # <parse>
-    #   #   @type nginx
-    #   # </parse>
-    # </filter>
+      <parse>
+        @type nginx
+      </parse>
+    </filter>
 
     <filter kubernetes-nginx.**>
       @type kubernetes_metadata
