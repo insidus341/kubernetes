@@ -60,7 +60,7 @@ data:
         format json
         path /var/log/containers/nginx-*.log
         pos_file /var/log/nginx-containers.log.pos
-        tag kubernetes.nginx
+        tag kubernetes-nginx
     </source>
 
     # <filter kubernetes.nginx.**>
@@ -73,11 +73,11 @@ data:
     #   # </parse>
     # </filter>
 
-    <filter kubernetes.**>
+    <filter kubernetes-nginx.**>
       @type kubernetes_metadata
     </filter>
 
-    <match kubernetes.nginx.**>
+    <match kubernetes-nginx.**>
       @type file
       path /tmp/nginx-test.log
     </match>
