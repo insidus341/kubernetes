@@ -69,9 +69,11 @@ data:
 
       <parse>
         @type nginx
+      </parse>
+      
+      <parse>  
         @type kubernetes_metadata
         @id filter_kube_metadata
-
       </parse>
     </filter>
 
