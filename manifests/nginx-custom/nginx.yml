@@ -62,3 +62,6 @@ spec:
         image: insidus341/nginx-test:1.0
         ports:
         - containerPort: 80
+        env:
+        - name: DEMO_ENV
+          value: "Hello this is demo"
