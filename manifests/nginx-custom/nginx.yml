@@ -65,7 +65,7 @@ spec:
         env:
         - name: DEMO_ENV
           value: "Fixed our startup time"
-        livenessProbe:
+        readinessProbe:
           httpGet:
             path: /index.php
             port: 80
