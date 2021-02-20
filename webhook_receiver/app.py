@@ -13,7 +13,9 @@ def respond():
         if "repository" in j:
             if "repo_name" in j['repository']:
                 repo_name = j['repository']['repo_name']
-                print(repo_name)
+                
+                if repo_name == "insidus341/nginx-test":
+                    redeploy()
     
     except Exception as e:
         print(e)
@@ -21,3 +23,7 @@ def respond():
     return Response(status=200)
 
 app.run(host='0.0.0.0', port=9000)
+
+
+def redeploy():
+    pass
