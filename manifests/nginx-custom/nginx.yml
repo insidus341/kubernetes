@@ -64,10 +64,10 @@ spec:
         - containerPort: 80
         env:
         - name: DEMO_ENV
-          value: "Our startup time should be better now"
-        startupProbe:
+          value: "Fixed our startup time"
+        livenessProbe:
           httpGet:
             path: /index.php
             port: 80
-          failureThreshold: 5
+          initialDelaySeconds: 10
           periodSeconds: 10
