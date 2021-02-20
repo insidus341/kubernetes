@@ -3,7 +3,7 @@ FROM richarvey/nginx-php-fpm:1.9.1
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-COPY nginx/site-available/default.conf /etc/nginx/sites-available/default.conf
+COPY nginx/sites-available/default.conf /etc/nginx/sites-available/default.conf
 
 COPY www /var/www/html
 
