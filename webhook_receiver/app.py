@@ -28,14 +28,6 @@ def respond():
 
     return Response(status=200)
 
-if __name__ == "__main__":
-    ANSIBLE_KEY = int(sys.argv[1])
-    print(ANSIBLE_KEY)
-    
-    redeploy()
-    # app.run(host='0.0.0.0', port=9000)
-
-
 def redeploy():
     hosts = DIR + "../ansible/kube-cluster/hosts/hosts"
     playbook = DIR + "../ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
@@ -53,3 +45,11 @@ def redeploy():
 
     outs, errs = proc.communicate(timeout=15)
     pprint.pprint(outs.decode().split('\n'))
+
+
+if __name__ == "__main__":
+    ANSIBLE_KEY = int(sys.argv[1])
+    print(ANSIBLE_KEY)
+    
+    redeploy()
+    # app.run(host='0.0.0.0', port=9000)
