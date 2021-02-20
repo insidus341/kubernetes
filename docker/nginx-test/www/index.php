@@ -1,10 +1,10 @@
 <?php
 
-if (getenv('DEMO_ENV')) {
-    $custom_var = getenv('DEMO_ENV')
-} else {
-    $custom_var = ""
-}
+// if (getenv('DEMO_ENV')) {
+//     $custom_var = getenv('DEMO_ENV')
+// } else {
+//     $custom_var = ""
+// }
 
 ?>
 
@@ -25,7 +25,7 @@ if (getenv('DEMO_ENV')) {
 <body>
     <div id="wrapper">
         <h1><?php echo gethostname(); ?></h1>
-        <h3><?php echo $custom_var; ?></h3>   
+        <h3><?php //echo $custom_var; ?></h3>   
     </div>
 
 </body>
