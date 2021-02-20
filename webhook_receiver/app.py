@@ -35,7 +35,7 @@ def redeploy():
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
            "-e ANSIBLE_HOST_KEY_CHECKING=False",
-           "--extra-vars 'ansible_password={}'".format(ANSIBLE_KEY),
+           "-e 'ansible_password=ANSIBLE_PASSWORD'",
            playbook
            ]
 
