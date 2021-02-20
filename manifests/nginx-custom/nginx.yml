@@ -64,7 +64,7 @@ spec:
         - containerPort: 80
         env:
         - name: DEMO_ENV
-          value: "Fixed our startup time"
+          value: "FAST"
         readinessProbe:
           httpGet:
             path: /index.php
