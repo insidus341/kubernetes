@@ -7,4 +7,3 @@ worker2 ansible_host=192.168.10.24 ansible_user=root
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
-ansible_ssh_pass={{ANSIBLE_PASSWORD}}

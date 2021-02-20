@@ -36,7 +36,7 @@ def redeploy():
            "-i {},".format(hosts),
            "-e ANSIBLE_HOST_KEY_CHECKING=False",
            playbook,
-           "-k {}".format(ANSIBLE_KEY)]
+           "--extra-vars 'ansible_password={}'".format(ANSIBLE_KEY)]
 
     proc = subprocess.Popen(cmd,
             stdin=subprocess.PIPE,
