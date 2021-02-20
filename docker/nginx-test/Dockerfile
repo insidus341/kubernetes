@@ -5,6 +5,6 @@ FROM richarvey/nginx-php-fpm:1.9.1
 
 # COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
-COPY www /usr/share/nginx/html
+COPY www /var/www/html
 
 EXPOSE 80
