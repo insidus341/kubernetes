@@ -6,7 +6,6 @@ import sys
 import os
 
 DIR = "/home/james/kubernetes/"
-ANSIBLE_KEY = ""
 app = Flask(__name__)
 
 @app.route('/docker-webhook/05b6053c41a2130afd6fc3b158bda4e6', methods=['POST', 'GET'])
@@ -35,7 +34,7 @@ def redeploy():
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
            "-e ANSIBLE_HOST_KEY_CHECKING=False",
-           "-e 'ansible_password=ANSIBLE_PASSWORD'",
+           "-e 'ansible_password=$ANSIBLE_PASSWORD'",
            playbook
            ]
 
@@ -49,8 +48,6 @@ def redeploy():
 
 
 if __name__ == "__main__":
-    ANSIBLE_KEY = str(sys.argv[1])
-    print(ANSIBLE_KEY)
     
     redeploy()
     # app.run(host='0.0.0.0', port=9000)
