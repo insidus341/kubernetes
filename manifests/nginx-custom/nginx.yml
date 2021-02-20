@@ -59,7 +59,7 @@ spec:
 
       containers:
       - name: nginx-custom
-        image: insidus341/nginx-test:1.01
+        image: insidus341/nginx-test:latest
         ports:
         - containerPort: 80
         env:
