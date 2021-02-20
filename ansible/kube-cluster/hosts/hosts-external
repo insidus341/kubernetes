@@ -1,2 +1,0 @@
-[masters]
-master ansible_host=kube-master.james-home.duckdns.org ansible_user=root
