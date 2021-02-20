@@ -31,12 +31,12 @@ def redeploy():
     hosts = DIR + "ansible/kube-cluster/hosts"
     print(hosts)
     playbook = DIR + "ansible/kube-cluster/playbooks/monitoring/check-kube-cluster-health.yml"
+    print(playbook)
 
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
-           "-e ANSIBLE_HOST_KEY_CHECKING=False",
-           "-e 'ansible_password=$ANSIBLE_PASSWORD'",
-           playbook
+           playbook,
+           "-e 'ansible_password=$ANSIBLE_PASSWORD'"
            ]
 
     proc = subprocess.Popen(cmd,
