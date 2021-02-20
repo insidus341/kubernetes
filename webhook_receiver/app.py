@@ -8,7 +8,7 @@ def respond():
     print(json.dumps(request.json))
 
     try:
-        j = request.json
+        j = request.get_json(silent=True)
 
         if "repository" in j:
             if "repo_name" in j['repository']:
