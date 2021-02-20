@@ -64,4 +64,10 @@ spec:
         - containerPort: 80
         env:
         - name: DEMO_ENV
-          value: "Hello this is demo"
+          value: "We're starting late"
+        startupProbe:
+          httpGet:
+            path: /index.php
+            port: 80
+          failureThreshold: 5
+          periodSeconds: 30
