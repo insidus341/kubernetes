@@ -30,7 +30,7 @@ def respond():
 
 def redeploy():
     hosts = DIR + "ansible/kube-cluster/hosts/hosts"
-    playbook = DIR + "ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
+    playbook = DIR + "ansible/kube-cluster/playbooks/monitoring/check-kube-cluster-health.yml"
 
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
