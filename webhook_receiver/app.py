@@ -7,4 +7,4 @@ def respond():
     print(request.json);
     return Response(status=200)
 
-app.run(host='0.0.0.0', port=6666)
+app.run(host='jamesearl.co.uk', port=6666)
