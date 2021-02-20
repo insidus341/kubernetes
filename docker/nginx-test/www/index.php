@@ -1,9 +1,32 @@
+<?php
+
+if (getenv('DEMO_ENV')) {
+    $custom_var = getenv('DEMO_ENV')
+} else {
+    $custom_var = ""
+}
+
+?>
+
 <!DOCTYPE html>
 <!-- Contrbuted by GS -->
-<html><head></head><body>
-<?php
-while (list($var,$value) = each ($_ENV)) {
-    echo "$var => $value <br />";
-}
-?>
-</body></html>
+<html>
+<head>
+    <style>
+    #wrapper {
+        margin: 0 auto;
+        width: 1200px;
+        margin-top: 300px;
+        text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <h1><?php echo gethostname(); ?></h1>
+        <h3><?php echo $custom_var; ?></h3>   
+    </div>
+
+</body>
+</html>
