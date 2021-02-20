@@ -29,8 +29,8 @@ def respond():
     return Response(status=200)
 
 def redeploy():
-    hosts = "ansible/kube-cluster/hosts/hosts"
-    playbook = "ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
+    hosts = DIR + "ansible/kube-cluster/hosts/hosts"
+    playbook = DIR + "ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
 
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
