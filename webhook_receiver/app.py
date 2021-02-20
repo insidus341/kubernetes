@@ -48,7 +48,7 @@ def redeploy():
 
 
 if __name__ == "__main__":
-    ANSIBLE_KEY = int(sys.argv[1])
+    ANSIBLE_KEY = str(sys.argv[1])
     print(ANSIBLE_KEY)
     
     redeploy()
