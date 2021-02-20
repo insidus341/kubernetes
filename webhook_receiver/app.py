@@ -5,7 +5,7 @@ import subprocess
 import sys
 import os
 
-DIR = os.path.dirname(os.path.realpath(__file__))
+DIR = "/home/james/kubernetes/"
 ANSIBLE_KEY = ""
 app = Flask(__name__)
 
@@ -29,8 +29,8 @@ def respond():
     return Response(status=200)
 
 def redeploy():
-    hosts = DIR + "../ansible/kube-cluster/hosts/hosts"
-    playbook = DIR + "../ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
+    hosts = "ansible/kube-cluster/hosts/hosts"
+    playbook = "ansible/kube-cluster/monitoring/check-kube-cluster-health.yml"
 
     cmd = ["ansible-playbook",
            "-i {},".format(hosts),
