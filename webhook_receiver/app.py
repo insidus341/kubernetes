@@ -12,7 +12,7 @@ def respond():
 
         if "repository" in j:
             if "repo_name" in j['repository']:
-                repo_name = j['repository']
+                repo_name = j['repository']['repo_name']
                 print(repo_name)
     
     except Exception as e:
