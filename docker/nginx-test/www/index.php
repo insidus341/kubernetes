@@ -20,6 +20,10 @@ if (getenv('DEMO_ENV')) {
         text-align: center;
     }
 
+    h1 {
+        color: red
+    }
+
     </style>
 </head>
 <body>
