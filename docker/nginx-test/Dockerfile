@@ -5,6 +5,6 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY nginx/sites-available/default.conf /etc/nginx/sites-available/default.conf
 
-COPY www /var/www/html
+# COPY www /var/www/html
 
 EXPOSE 80
