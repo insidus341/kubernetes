@@ -63,8 +63,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: DEMO_ENV
-          value: "FAST"
+        # - name: DEMO_ENV
+        #   value: "FAST"
         readinessProbe:
           httpGet:
             path: /index.php
