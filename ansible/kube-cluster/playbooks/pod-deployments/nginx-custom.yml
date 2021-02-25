@@ -14,3 +14,6 @@
 
     - name: Run Nginx deployment
       command: kubectl apply -f ~/manifests/nginx-custom/nginx.yml
+
+    - name: Rolling update
+      command: kubectl rollout restart deployment nginx-custom
