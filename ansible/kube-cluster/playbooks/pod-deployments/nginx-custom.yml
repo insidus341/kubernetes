@@ -8,7 +8,8 @@
 
     - name: Copy required manifests
       ansible.builtin.copy:
-        src: ~/kubernetes/manifests/nginx-custom
+        # src: ~/kubernetes/manifests/nginx-custom
+        src: manifests/nginx-custom
         dest: ~/manifests/
 
     - name: Run Nginx deployment
