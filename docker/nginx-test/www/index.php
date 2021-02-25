@@ -23,7 +23,6 @@ if (getenv('DEMO_ENV')) {
     h1 {
         color: green
     }
-
     </style>
 </head>
 <body>
