@@ -1,0 +1,7 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Update nginx-custom deployment
+      command: "kubectl --record deployment nginx-custom set image insidus341/nginx-custom:{{JENKINS_BUILD_NUMBER}}"
