@@ -4,4 +4,4 @@
 
   tasks:
     - name: Update nginx-custom deployment
-      command: "kubectl --record deployment nginx-custom set image insidus341/nginx-custom:{{JENKINS_BUILD_NUMBER}}"
+      command: "kubectl set image deployment/nginx-custom nginx-custom=insidus341/nginx-test:{{JENKINS_BUILD_NUMBER}} --record"
