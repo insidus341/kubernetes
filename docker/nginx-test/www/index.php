@@ -21,7 +21,7 @@ if (getenv('DEMO_ENV')) {
     }
 
     h1 {
-        color: #06f06f
+        color: red
     }
 
     </style>
