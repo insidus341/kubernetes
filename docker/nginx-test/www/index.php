@@ -21,7 +21,7 @@ if (getenv('DEMO_ENV')) {
     }
 
     h1 {
-        color: black;
+        color: red;
         font-size: 48px;
     }
 
