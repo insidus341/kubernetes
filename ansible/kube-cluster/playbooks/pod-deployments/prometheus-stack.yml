@@ -25,5 +25,5 @@
     - name: Create prometheus ingress
       command: kubectl apply -f ~/manifests/prometheus-stack/prometheus-ingress.yml
 
-    # - name: Start grafana
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/grafana.yml
+    - name: Start grafana
+      command: kubectl apply -f ~/manifests/prometheus-stack/grafana-ingress.yml
