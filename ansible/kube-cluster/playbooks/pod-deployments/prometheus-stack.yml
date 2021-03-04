@@ -10,6 +10,9 @@
       ansible.builtin.copy:
         src: ~/kubernetes/manifests/prometheus-stack
         dest: ~/manifests/
+    
+    - name: Add prometheus namespace
+      command: kubectl apply -f ~/manifests/prometheus-stack/namespace.yml
       
     - name: Add helm chart for Prometheus stack
       shell: |
@@ -17,10 +20,9 @@
         helm repo update
     
     - name: Install Prometheus stack
-      command: helm install stable prometheus-community/kube-prometheus-stack
+      command: helm install prometheus prometheus-community/kube-prometheus-stack -n kube-monitoring
 
-    # - name: Add prometheus namespace
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/namespace.yml
+    
 
     # - name: Start prometheus
     #   command: kubectl apply -f ~/manifests/prometheus-stack/prometheus.yml
