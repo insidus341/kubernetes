@@ -22,10 +22,8 @@
     - name: Install Prometheus stack
       command: helm install prometheus prometheus-community/kube-prometheus-stack -n kube-monitoring
 
-    
-
-    # - name: Start prometheus
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/prometheus.yml
+    - name: Create prometheus ingress
+      command: kubectl apply -f ~/manifests/prometheus-stack/prometheus-ingress.yml
 
     # - name: Start grafana
     #   command: kubectl apply -f ~/manifests/prometheus-stack/grafana.yml
