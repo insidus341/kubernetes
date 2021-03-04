@@ -1,0 +1,29 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Ensure destination directory exists
+      command: mkdir -p ~/manifests/prometheus-stack
+
+    - name: Copy required manifests
+      ansible.builtin.copy:
+        src: ~/kubernetes/manifests/prometheus-stack
+        dest: ~/manifests/
+      
+    - name: Add helm chart for Prometheus stack
+      shell: |
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        help repo update
+    
+    - name: Install Prometheus stack
+      command: helm install stable prometheus-community/kube-prometheus-stack
+
+    # - name: Add prometheus namespace
+    #   command: kubectl apply -f ~/manifests/prometheus-stack/namespace.yml
+
+    # - name: Start prometheus
+    #   command: kubectl apply -f ~/manifests/prometheus-stack/prometheus.yml
+
+    # - name: Start grafana
+    #   command: kubectl apply -f ~/manifests/prometheus-stack/grafana.yml
