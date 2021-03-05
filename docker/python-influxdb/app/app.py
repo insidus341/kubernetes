@@ -65,9 +65,10 @@ if __name__ == "__main__":
         client.create_database(DATABASE)
 
     client.switch_database(DATABASE)
-    
+
     while True:
         (latency, loss) = send_ping()
-        insert_data(client, latency, loss)
+        if latency is not None or loss is not None:
+            insert_data(client, latency, loss)
 
         time.sleep(5)
