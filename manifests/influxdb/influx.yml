@@ -26,15 +26,15 @@ spec:
 ---
 
 apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-creds
+  namespace: influxdb
 data:
   INFLUXDB_DATABASE: cGluZ2xhdGVuY3k=
   INFLUXDB_HOST: aW5mbHV4ZGI=
   INFLUXDB_PASSWORD: cm9vdA==
   INFLUXDB_USERNAME: cm9vdA==
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: influxdb-creds
 
 ---
 
