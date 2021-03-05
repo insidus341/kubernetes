@@ -17,6 +17,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: python-influxdb-ping
+  namespace: influxdb
 spec:
   selector:
     matchLabels:
@@ -28,7 +29,7 @@ spec:
     spec:
       containers:
       - name: python-influxdb-ping
-        image: insidus341/python-influxdb
+        image: insidus341/python-influxdb:test
         imagePullPolicy: "Always"
         resources:
           requests:
