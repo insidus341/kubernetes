@@ -1,0 +1,36 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: python-influxdb-ping
+#   labels:
+#     app: python-influxdb-ping
+# spec:
+#   type: ClusterIP
+#   ports:
+#   - port: 
+#   selector:
+#     app: python-influxdb-ping
+
+# ---
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: python-influxdb-ping
+spec:
+  selector:
+    matchLabels:
+      app: python-influxdb-ping
+  template:
+    metadata:
+      labels:
+        app: python-influxdb-ping
+    spec:
+      containers:
+      - name: python-influxdb-ping
+        image: insidus341/python-influxdb
+        imagePullPolicy: "Always"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
