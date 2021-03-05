@@ -18,8 +18,8 @@ PING_DST="8.8.8.8"
 def send_ping():
     regex = "time=[0-9.]{1,6} ms"
     
-    latency = None
-    loss = None
+    latency = 0
+    loss = 1
 
     try:
         cmd = "ping -W {} -c {} {}".format(PING_WAIT, 1, PING_DST).split(' ')
