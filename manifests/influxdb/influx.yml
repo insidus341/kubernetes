@@ -29,7 +29,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: influxdb
-  namespace: kinfluxdb
+  namespace: influxdb
 
 spec:
   serviceName: influxdb
