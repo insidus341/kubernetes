@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: influxdb-ingress
+  namespace: influxdb
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: influxdb.domain.com
+    http:
+      paths:
+      - backend:
+          serviceName: influxdb
+          servicePort: 8086
