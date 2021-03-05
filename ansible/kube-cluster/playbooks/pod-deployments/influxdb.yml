@@ -1,0 +1,13 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Ensure destination directory exists
+      command: mkdir -p ~/manifests/influxdb
+
+    - name: Create the influx Namespace
+      command: kubectl apply -f ~/manifests/influxdb/namespace.yml
+
+    - name: Run Influxdb deployment
+      command: kubectl apply -f ~/manifests/influxdb/influx.yml

@@ -1,0 +1,83 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: influxdb-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/host-path
+reclaimPolicy: Retain
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: influxdb
+  namespace: influxdb
+  labels:
+    app: influxdb
+spec:
+  selector:
+    app: influxdb
+  clusterIP: None
+  ports:
+    - port: 8086
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: influxdb
+  namespace: kinfluxdb
+
+spec:
+  serviceName: influxdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - influxdb
+              topologyKey: "kubernetes.io/hostname"
+
+      containers:
+      - name: influxdb
+        image: docker.io/influxdb:2.0.4
+        resources:
+            limits:
+              cpu: 200m
+            requests:
+              cpu: 50m
+        ports:
+        - containerPort: 8086
+        volumeMounts:
+        - name: var-lib-influxdb
+          mountPath: /var/lib/influxdb
+  
+  volumeClaimTemplates:
+  - metadata:
+      name: var-lib-influxdb
+      labels:
+        app: influxdb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: influxdb-storage
+      resources:
+        requests:
+          storage: 100Mi
