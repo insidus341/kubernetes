@@ -16,7 +16,7 @@ PING_WAIT=2
 PING_DST="8.8.8.8"
 
 def send_ping():
-    regex = "time=[0-9.]{1,6}ms"
+    regex = "time=[0-9.]{1,6} ms"
     
     latency = None
     loss = None
