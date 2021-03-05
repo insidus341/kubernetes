@@ -41,9 +41,7 @@ def send_ping():
     return (latency, loss)
 
 
-def insert_data(latency, loss):
-    client = InfluxDBClient(host=HOST, port=PORT)
-
+def insert_data(client, latency, loss):
     if DATABASE not in client.get_list_database():
         client.create_database(DATABASE)
 
@@ -64,8 +62,11 @@ def insert_data(latency, loss):
 
     client.write_points(data)
 
-while True:
-    (latency, loss) = send_ping()
-    insert_data(latency, loss)
 
-    time.sleep(1)
+if __name__ == "__main__":
+    client = InfluxDBClient(host=HOST, port=PORT)
+    while True:
+        (latency, loss) = send_ping()
+        insert_data(client, latency, loss)
+
+        time.sleep(5)
