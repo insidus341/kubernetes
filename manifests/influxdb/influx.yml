@@ -39,12 +39,14 @@ data:
 ---
 
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  labels:
-    app: influxdb
   name: influxdb
+  namespace: influxdb
+
 spec:
+  serviceName: influxdb
+  replicas: 1
   selector:
     matchLabels:
       app: influxdb
@@ -52,17 +54,38 @@ spec:
     metadata:
       labels:
         app: influxdb
+    
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - influxdb
+              topologyKey: "kubernetes.io/hostname"
+
       containers:
-      - envFrom:
+      - name: influxdb
+        image: docker.io/influxdb:1.8.4
+        resources:
+            limits:
+              cpu: 200m
+            requests:
+              cpu: 50m
+        ports:
+        - containerPort: 8086
+        envFrom:
         - secretRef:
             name: influxdb-creds
-        image: docker.io/influxdb:1.6.4
-        imagePullPolicy: IfNotPresent
-        name: influxdb
         volumeMounts:
-        - mountPath: /var/lib/influxdb
-          name: var-lib-influxdb
+        - name: var-lib-influxdb
+          mountPath: /var/lib/influxdb
+  
   volumeClaimTemplates:
   - metadata:
       name: var-lib-influxdb
@@ -74,64 +97,3 @@ spec:
       resources:
         requests:
           storage: 100Mi
-
-
-# apiVersion: apps/v1
-# kind: StatefulSet
-# metadata:
-#   name: influxdb
-#   namespace: influxdb
-
-# spec:
-#   serviceName: influxdb
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: influxdb
-#   template:
-#     metadata:
-#       labels:
-#         app: influxdb
-    
-#     spec:
-#       affinity:
-#         podAntiAffinity:
-#           preferredDuringSchedulingIgnoredDuringExecution:
-#           - weight: 100
-#             podAffinityTerm:
-#               labelSelector:
-#                 matchExpressions:
-#                 - key: app
-#                   operator: In
-#                   values:
-#                   - influxdb
-#               topologyKey: "kubernetes.io/hostname"
-
-#       containers:
-#       - name: influxdb
-#         image: docker.io/influxdb:2.0.4
-#         resources:
-#             limits:
-#               cpu: 200m
-#             requests:
-#               cpu: 50m
-#         ports:
-#         - containerPort: 8086
-#         envFrom:
-#         - secretRef:
-#             name: influxdb-creds
-#         volumeMounts:
-#         - name: var-lib-influxdb
-#           mountPath: /var/lib/influxdb2
-  
-#   volumeClaimTemplates:
-#   - metadata:
-#       name: var-lib-influxdb
-#       labels:
-#         app: influxdb
-#     spec:
-#       accessModes: [ "ReadWriteOnce" ]
-#       storageClassName: influxdb-storage
-#       resources:
-#         requests:
-#           storage: 100Mi
