@@ -4,6 +4,7 @@ metadata:
   labels:
     app: influxdb
   name: influxdb-np
+  namespace: influxdb
 spec:
   ports:
   - name: 8086-8086
