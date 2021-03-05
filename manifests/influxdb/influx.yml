@@ -25,6 +25,19 @@ spec:
 
 ---
 
+apiVersion: v1
+data:
+  INFLUXDB_DATABASE: cGluZ2xhdGVuY3k=
+  INFLUXDB_HOST: aW5mbHV4ZGI=
+  INFLUXDB_PASSWORD: cm9vdA==
+  INFLUXDB_USERNAME: cm9vdA==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: influxdb-creds
+
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -66,6 +79,9 @@ spec:
               cpu: 50m
         ports:
         - containerPort: 8086
+        envFrom:
+        - secretRef:
+            name: influxdb-creds
         volumeMounts:
         - name: var-lib-influxdb
           mountPath: /var/lib/influxdb
