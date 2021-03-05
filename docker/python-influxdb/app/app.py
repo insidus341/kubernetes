@@ -8,9 +8,9 @@ import subprocess
 import re
 import time
 
-HOST="192.168.10.24"
-PORT=32665
-DATABASE="pythontest22"
+HOST="influxdb.influxdb"
+PORT=8086
+DATABASE="pod-ping-latency-loss"
 HOSTNAME=socket.gethostname()
 PING_WAIT=2
 PING_DST="8.8.8.8"
