@@ -10,20 +10,20 @@
       ansible.builtin.copy:
         src: ~/kubernetes/manifests/prometheus-stack
         dest: ~/manifests/
+    
+    - name: Add prometheus namespace
+      command: kubectl apply -f ~/manifests/prometheus-stack/namespace.yml
       
     - name: Add helm chart for Prometheus stack
       shell: |
-        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-        help repo update
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts --force-update
+        helm repo update
     
     - name: Install Prometheus stack
-      command: helm install stable prometheus-community/kube-prometheus-stack
+      command: helm install prometheus prometheus-community/kube-prometheus-stack -n kube-monitoring
 
-    # - name: Add prometheus namespace
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/namespace.yml
+    - name: Create prometheus ingress
+      command: kubectl apply -f ~/manifests/prometheus-stack/prometheus-ingress.yml
 
-    # - name: Start prometheus
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/prometheus.yml
-
-    # - name: Start grafana
-    #   command: kubectl apply -f ~/manifests/prometheus-stack/grafana.yml
+    - name: Start grafana
+      command: kubectl apply -f ~/manifests/prometheus-stack/grafana-ingress.yml

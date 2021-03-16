@@ -1,2 +1,2 @@
 # Kubernetes
-addition x3
+https://trello.com/b/wsarOZGV/kubernetes
