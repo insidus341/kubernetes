@@ -1,6 +1,6 @@
 - hosts: all
   become: yes
-  become_user: james
+  # become_user: james
 
   tasks:
     - name: Restart Docker
