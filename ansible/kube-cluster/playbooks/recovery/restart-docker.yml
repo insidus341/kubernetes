@@ -1,16 +1,7 @@
 - hosts: all
   become: yes
-  # become_user: james
 
   tasks:
     - name: Restart Docker
       command: systemctl restart docker
-
-    - name: Confirm Docker is running
-      command: "systemctl status docker | grep active"
-      register: dockerstatus
-
-    - name: 
-      ansible.builtin.debug:
-        var: dockerstatus['stdout_lines']
       
