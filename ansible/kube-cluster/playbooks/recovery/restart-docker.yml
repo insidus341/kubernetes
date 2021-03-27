@@ -7,10 +7,10 @@
       command: systemctl restart docker
 
     - name: Confirm Docker is running
-      command: docker ps
-      register: dockerps
+      command: systemctl status docker | grep active
+      register: dockerstatus
 
     - name: 
       ansible.builtin.debug:
-        var: dockerps['stdout_lines']
+        var: dockerstatus['stdout_lines']
       
