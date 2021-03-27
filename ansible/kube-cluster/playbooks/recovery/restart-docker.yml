@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Restart Docker
+      command: systemctl restart docker
+
+    - name: Confirm Docker is running
+      command: docker ps
+      register: dockerps
+
+    - name: 
+      ansible.builtin.debug:
+        var: dockerps['stdout_lines']
+      
