@@ -7,7 +7,7 @@
       command: systemctl restart docker
 
     - name: Confirm Docker is running
-      command: systemctl status docker | grep active
+      command: "systemctl status docker | grep active"
       register: dockerstatus
 
     - name: 
