@@ -49,7 +49,7 @@ pipeline {
         //     }
         // }
 
-        stagae ('Deploy new container to Kubernetes') {
+        stage ('Deploy new container to Kubernetes') {
             when {
                 expression {
                     env.BRANCH_NAME == main_branch
