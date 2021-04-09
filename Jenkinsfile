@@ -23,28 +23,42 @@ pipeline {
             }
         }
 
-        stage ('Push container to Docker Hub') {
+        // stage ('Push container to Docker Hub') {
+        //     when {
+        //         expression {
+        //             env.BRANCH_NAME == development_branch || env.BRANCH_NAME == main_branch
+        //         }
+        //     }
+
+        //     steps {
+        //         script {
+        //             if (env.BRANCH_NAME == development_branch) {
+        //                 docker.withRegistry('', registryCredential) {
+        //                     dockerImage.push("beta-$BUILD_NUMBER")
+        //                     dockerImage.push("beta")
+        //                 }
+        //             }
+
+        //             if (env.BRANCH_NAME == main_branch) {
+        //                 docker.withRegistry('', registryCredential) {
+        //                     dockerImage.push("$BUILD_NUMBER")
+        //                     dockerImage.push("latest")
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        stagae ('Deploy new container to Kubernetes') {
             when {
                 expression {
-                    env.BRANCH_NAME == development_branch || env.BRANCH_NAME == main_branch
+                    env.BRANCH_NAME == main_branch
                 }
             }
-
+            
             steps {
                 script {
-                    if (env.BRANCH_NAME == development_branch) {
-                        docker.withRegistry('', registryCredential) {
-                            dockerImage.push("beta-$BUILD_NUMBER")
-                            dockerImage.push("beta")
-                        }
-                    }
-
-                    if (env.BRANCH_NAME == main_branch) {
-                        docker.withRegistry('', registryCredential) {
-                            dockerImage.push("$BUILD_NUMBER")
-                            dockerImage.push("latest")
-                        }
-                    }
+                    sh "ssh james@james-home.duckdns.org -p 9100 ls"
                 }
             }
         }
