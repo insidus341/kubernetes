@@ -58,7 +58,7 @@ pipeline {
             
             steps {
                 script {
-                    sh "ssh james@james-home.duckdns.org -p 9100 ls"
+                    sh "ssh -o StrictHostKeyChecking=no james@james-home.duckdns.org -p 9100 -i /usr/ssh/ansible-kube ls"
                 }
             }
         }
