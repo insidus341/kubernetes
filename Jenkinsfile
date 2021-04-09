@@ -1,4 +1,6 @@
 pipeline {
+    // test
+    
     environment{
         registry = "insidus341/nginx-custom"
         registryCredential = "DockerHub"
