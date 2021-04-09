@@ -18,7 +18,7 @@ pipeline {
 
             steps {
                 script {
-                    dockerImage = docker.build("nginx-custom", "./docker/nginx-test") 
+                    dockerImage = docker.build(registry, "./docker/nginx-test") 
                 }
             }
         }
