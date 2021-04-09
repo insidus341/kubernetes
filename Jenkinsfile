@@ -20,7 +20,7 @@ pipeline {
 
             steps {
                 script {
-                    dockerImage = docker.build("nginx-custom", "./docker/nginx-test") registry + ":beta-$BUILD_NUMBER"
+                    dockerImage = docker.build(registry + ":beta-$BUILD_NUMBER", "./docker/nginx-test")
                 }
             }
         }
