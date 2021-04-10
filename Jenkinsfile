@@ -58,7 +58,7 @@ pipeline {
             
             steps {
                 script {
-                    sh "ssh -o StrictHostKeyChecking=no james@james-home.duckdns.org -p 9090 -i /usr/ssh/ansible-devops 'echo $BUILD_NUMBER; ansible-playbook -i ./kubernetes/ansible/kube-cluster/hosts/hosts.ini ./kubernetes/ansible/kube-cluster/playbooks/deployment-updates/nginx-custom.yml -k -e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'"
+                    sh "ssh -o StrictHostKeyChecking=no james@james-home.duckdns.org -p 9090 -i /usr/ssh/ansible-devops 'ansible-playbook -i ./kubernetes/ansible/kube-cluster/hosts/hosts.ini ./kubernetes/ansible/kube-cluster/playbooks/deployment-updates/nginx-custom.yml -k -e JENKINS_BUILD_NUMBER=$BUILD_NUMBER'"
                 }
             }
         }
