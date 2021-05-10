@@ -2,6 +2,5 @@
   become: yes
 
   tasks:
-    - name: Restart Docker
-      command: systemctl restart docker
-      
+    - name: Restart VM
+      command: reboot now
