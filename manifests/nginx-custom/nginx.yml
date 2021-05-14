@@ -66,9 +66,9 @@ spec:
         env:
         # - name: DEMO_ENV
         #   value: "FAST"
-        # readinessProbe:
-        #   httpGet:
-        #     path: /index.php
-        #     port: 80
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /index.php
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
