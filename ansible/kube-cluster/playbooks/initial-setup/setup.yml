@@ -24,4 +24,11 @@
         name: python3
         state: present
         update_cache: true
+        
+    - name: install ntp
+      apt:
+        name: ntp
+        state: present
+        update_cache: true
+      
       
