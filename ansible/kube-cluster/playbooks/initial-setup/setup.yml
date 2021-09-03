@@ -6,7 +6,6 @@
       apt:
         name: sudo
         state: present
-        update_cache: true
 
     - name: allow 'james' to have passwordless sudo
       lineinfile:
@@ -23,12 +22,10 @@
       apt:
         name: python3
         state: present
-        update_cache: true
         
     - name: install ntp
       apt:
         name: ntp
         state: present
-        update_cache: true
       
       
