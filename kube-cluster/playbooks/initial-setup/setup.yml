@@ -1,0 +1,31 @@
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: install Sudo
+      apt:
+        name: sudo
+        state: present
+
+    - name: allow 'james' to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'james ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Setup authorized SSH Key
+      authorized_key: user=james key="{{item}}"
+      with_file:
+        - ~/.ssh/id_rsa.pub
+
+    - name: install Python3
+      apt:
+        name: python3
+        state: present
+        
+    - name: install ntp
+      apt:
+        name: ntp
+        state: present
+      
+      
