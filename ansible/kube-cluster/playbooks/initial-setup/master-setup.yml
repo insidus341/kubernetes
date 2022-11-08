@@ -1,40 +1,41 @@
 - hosts: master
   become: yes
-  become_user: james
+#  become_user: james
   tasks:
     - name: initialize the cluster
       shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all >> cluster_initialized.txt
 
     - name: create .kube directory
       file:
-        path: $HOME/.kube
+#        path: $HOME/.kube
+        path: /home/ubuntu/.kube
         state: directory
         mode: 0755
 
     - name: copy admin.conf to user's kube config
       copy:
         src: /etc/kubernetes/admin.conf
-        dest: /home/james/.kube/config
+        dest: /home/ubuntu/.kube/config
         remote_src: yes
-        owner: james
+        owner: ubuntu
 
     - name: install Pod network
-      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
+      shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
       args:
-        chdir: $HOME
+        chdir: /home/ubuntu
         creates: pod_network_setup.txt
 
-    - name: Copy configmap for local load balancer
-      ansible.builtin.copy:
-        src: ~/kubernetes/manifests/metallb
-        dest: ~/manifests/
+#    - name: Copy configmap for local load balancer
+#      ansible.builtin.copy:
+#        src: ~/kubernetes/manifests/metallb
+#        dest: ~/manifests/
 
-    - name: Install a local load balancer (only needed for test deployments)
-      shell: |
-        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-        kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-        kubectl apply -f ~/manifests/metallb/configmap.yml
+#    - name: Install a local load balancer (only needed for test deployments)
+#      shell: |
+#        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+#        kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+#        kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+#        kubectl apply -f ~/manifests/metallb/configmap.yml
     
     - name: Install Ingress
       shell: |

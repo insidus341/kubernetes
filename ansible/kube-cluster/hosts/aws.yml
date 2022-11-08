@@ -1,0 +1,12 @@
+all:
+  children:
+    master:
+      hosts:
+        3.10.215.28: null
+    workers:
+      hosts:
+        13.41.80.18: null
+        18.130.25.48: null
+        35.178.189.246: null
+  hosts: null
+
