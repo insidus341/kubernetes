@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Restart Docker
+      command: systemctl restart docker
+
+      

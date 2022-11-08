@@ -1,0 +1,97 @@
+- hosts: all
+  become: yes
+  tasks:
+   - name: install remote apt deps
+     apt:
+       update_cache: true
+       name: "{{ item }}"
+       state: present
+     with_items:
+       - apt-transport-https
+       - ca-certificates
+       - gnupg2
+       - software-properties-common
+       - curl
+
+   - name: add Docker apt-key
+     apt_key:
+       url: https://download.docker.com/linux/debian/gpg
+       state: present
+
+   - name: add Docker's APT repository
+     apt_repository:
+      repo: deb https://download.docker.com/linux/debian buster stable
+      state: present
+      filename: 'docker'
+
+   - name: install Docker
+     apt:
+       name: docker-ce
+       state: present
+       update_cache: true
+   
+   - name: Force Docker to use Systemd
+     command: sed -i '\/ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock/c\ExecStart=\/usr\/bin\/dockerd -H fd:\/\/ --containerd=\/run\/containerd\/containerd.sock --exec-opt native.cgroupdriver=systemd' /usr/lib/systemd/system/docker.service
+   
+   - name: Restart Docker
+     shell: |
+       systemctl daemon-reload
+       systemctl restart docker
+
+   - name: add Kubernetes apt-key
+     apt_key:
+       url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+       state: present
+
+   - name: add Kubernetes' APT repository
+     apt_repository:
+      repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+      filename: 'kubernetes'
+
+   - name: install kubelet
+     apt:
+       name: kubelet
+       state: present
+       update_cache: true
+
+   - name: install kubeadm
+     apt:
+       name: kubeadm
+       state: present
+
+   - name: Disable system swap
+     shell: | 
+       swapoff -a
+       sed -i '/ swap / s/^/#/' /etc/fstab
+
+   - name: fix containerd
+     shell: |
+       rm /etc/containerd/config.toml
+       systemctl restart containerd
+
+- hosts: master
+  become: yes
+  tasks:
+   - name: install kubectl
+     apt:
+       name: kubectl
+       state: present
+       force: yes
+
+   - name: add Helm's APT key
+     apt_key:
+       url: https://baltocdn.com/helm/signing.asc
+       state: present
+
+   - name: add Helm's APT repository
+     apt_repository:
+       repo: deb https://baltocdn.com/helm/stable/debian/ all main
+       state: present
+       filename: 'helm'
+
+   - name: Install Helm
+     apt:
+       name: helm
+       state: present
+       update_cache: true

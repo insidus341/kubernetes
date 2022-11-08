@@ -1,0 +1,16 @@
+- hosts: master
+  become: yes
+  become_user: james
+
+  tasks:
+    - name: Ensure destination directory exists
+      command: mkdir -p ~/manifests/nginx-custom
+
+    - name: Copy required manifests
+      ansible.builtin.copy:
+        # src: ~/kubernetes/manifests/nginx-custom
+        src: "/var/lib/jenkins/workspace/Test project/manifests/nginx-custom"
+        dest: ~/manifests/
+
+    - name: Run Nginx deployment
+      command: kubectl apply -f ~/manifests/nginx-custom/nginx.yml
